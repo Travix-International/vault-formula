@@ -1,0 +1,2 @@
+{% from "vault/map.jinja" import vault with context %}
+{{ vault.config | json(indent=2)}}

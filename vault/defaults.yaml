@@ -1,0 +1,15 @@
+vault:
+  version: 0.5.2
+  hash: 7517b21d2c709e661914fbae1f6bf3622d9347b0fe9fc3334d78a01d1e1b4ec2
+
+  service: false
+
+  config:
+    listener: 
+      tcp:
+        address: "127.0.0.1:8200"
+        tls_disable: 1
+    backend: 
+      consul:
+        address: "127.0.0.1:8500"
+        path: "vault"

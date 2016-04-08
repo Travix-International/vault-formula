@@ -1,0 +1,51 @@
+{% set environment = grains.get('environment') %}
+
+
+consul:
+{%- if environment == 'production' %}
+  version: 0.6.4
+  hash: abdf0e1856292468e2c9971420d73b805e93888e006c76324ae39416edcf0627
+
+  ui_version: 0.6.4
+  ui_hash: 5f8841b51e0e3e2eb1f1dc66a47310ae42b0448e77df14c83bb49e0e0d5fa4b7
+
+  template_version: 0.14.0
+  template_hash: 7c70ea5f230a70c809333e75fdcff2f6f1e838f29cfb872e1420a63cdf7f3a78
+
+  service: true
+
+  config:
+    server: true
+    bind_addr: 0.0.0.0
+    enable_debug: false
+    log_level: info
+    datacenter: vault-eu
+    encrypt: "P7N1RpYGUXvdEQx/yPKsrA=="
+    bootstrap_expect: 3
+    retry_interval: 30s
+    retry_join:
+      - 10.240.0.1
+      - 10.240.0.2
+      - 10.240.0.3
+
+  register: []
+  scripts: []
+
+vault:
+  version: 0.5.2
+  hash: 7517b21d2c709e661914fbae1f6bf3622d9347b0fe9fc3334d78a01d1e1b4ec2
+
+  service: True
+
+  config:
+    listener: 
+      tcp:
+        address: "127.0.0.1:8200"
+        tls_disable: 1
+    backend: 
+      consul:
+        address: "127.0.0.1:8500"
+        path: "vault"
+{% else %}
+
+{% endif %}

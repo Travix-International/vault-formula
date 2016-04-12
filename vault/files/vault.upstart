@@ -15,7 +15,7 @@ script
 
   exec start-stop-daemon --start \
     --exec /usr/local/bin/vault server -- \
-      -config-dir="/etc/vault.d" \
+      -config="/etc/vault.d" \
       ${VAULT_FLAGS} \
       >> /var/log/vault.log 2>&1
 end script

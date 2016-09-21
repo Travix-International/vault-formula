@@ -32,8 +32,11 @@ consul:
   scripts: []
 
 vault:
-  version: 0.5.2
-  hash: 7517b21d2c709e661914fbae1f6bf3622d9347b0fe9fc3334d78a01d1e1b4ec2
+  # version: 0.5.2
+  # hash: 7517b21d2c709e661914fbae1f6bf3622d9347b0fe9fc3334d78a01d1e1b4ec2
+
+  version: 0.6.1
+  hash: 4f248214e4e71da68a166de60cc0c1485b194f4a2197da641187b745c8d5b8be
 
   service: True
 

@@ -2,7 +2,11 @@
 
 vault-init-script:
   file.managed:
-    {% if salt['test.provider']('service') == 'upstart' %}
+    {%- if salt['test.provider']('service') == 'systemd' %}
+    - source: salt://vault/files/vault.service
+    - name: /etc/systemd/system/vault.service
+    - mode: 0644
+    {% elif salt['test.provider']('service') == 'upstart' %}
     - source: salt://vault/files/vault.upstart
     - name: /etc/init/vault.conf
     - mode: 0644

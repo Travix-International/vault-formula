@@ -9,8 +9,9 @@ ExecStart=/usr/local/bin/vault server -config=/etc/vault.d
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=TERM
 
-# For mlock syscall
-User=root
+# For mlock:
+# sudo setcap cap_ipc_lock=+ep $(readlink -f $(which vault))
+User=vault
 
 [Install]
 WantedBy=multi-user.target

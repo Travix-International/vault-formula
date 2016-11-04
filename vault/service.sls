@@ -24,4 +24,7 @@ vault-init-script:
 vault-service:
   service.running:
     - name: vault
+    - enable: True
+    - watch:
+      - file: vault-init-script
 {% endif %}

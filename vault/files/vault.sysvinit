@@ -24,7 +24,7 @@
 . /etc/rc.d/init.d/functions
 
 prog="vault"
-user="root"
+user="vault"
 exec="/usr/local/bin/$prog"
 pidfile="/var/run/$prog.pid"
 lockfile="/var/lock/subsys/$prog"

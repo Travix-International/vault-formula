@@ -7,25 +7,44 @@ unzip:
   file.directory:
     - makedirs: True
 
+# Create vault user
+vault-user:
+  group.present:
+    - name: vault
+  user.present:
+    - name: vault
+    - createhome: false
+    - system: true
+    - groups:
+      - vault
+    - require:
+      - group: vault
+
 # Create directories
 vault-config-dir:
   file.directory:
     - name: /etc/vault.d
-    - user: root
-    - group: root
+    - user: vault
+    - group: vault
+    - require:
+      - user: vault
 
 vault-runtime-dir:
   file.directory:
     - name: /var/vault
-    - user: root
-    - group: root
+    - user: vault
+    - group: vault
+    - require:
+      - user: vault
 
 vault-data-dir:
   file.directory:
     - name: /usr/local/share/vault
-    - user: root
-    - group: root
+    - user: vault
+    - group: vault
     - makedirs: 
+    - require:
+      - user: vault
 
 # Install vault
 vault-download:
@@ -60,5 +79,12 @@ vault-link:
   file.symlink:
     - target: vault-{{ vault.version }}
     - name: /usr/local/bin/vault
+    - watch:
+      - file: vault-install
+
+vault-set-cap-mlock:
+  cmd.run:
+    - name: "setcap cap_ipc_lock=+ep $(readlink -f $(which vault))"
+    - unless: {{ vault.config.disable_mlock }}
     - watch:
       - file: vault-install

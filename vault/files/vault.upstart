@@ -14,6 +14,7 @@ script
   export GOMAXPROCS=`nproc`
 
   exec start-stop-daemon --start \
+    --chuid vault \
     --exec /usr/local/bin/vault server -- \
       -config="/etc/vault.d" \
       ${VAULT_FLAGS} \

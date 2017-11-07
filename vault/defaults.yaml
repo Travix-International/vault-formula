@@ -1,4 +1,6 @@
 vault:
+  user: vault
+  group: vault
   version: 0.6.4
   hash: 04d87dd553aed59f3fe316222217a8d8777f40115a115dac4d88fac1611c51a6
 

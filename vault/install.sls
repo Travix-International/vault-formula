@@ -88,3 +88,21 @@ vault-set-cap-mlock:
     - unless: {{ vault.config.disable_mlock }}
     - watch:
       - file: vault-install
+
+vault-log-file:
+  file.managed:
+    - name: /var/log/vault.log
+    - user: {{ vault.user }}
+    - group: {{ vault.group }}
+    - mode: 0644
+    - require:
+      - file: vault-install
+
+vault-audit-log-file:
+  file.managed:
+    - name: /var/log/vault-audit.log
+    - user: {{ vault.user }}
+    - group: {{ vault.group }}
+    - mode: 0600
+    - require:
+      - file: vault-install
